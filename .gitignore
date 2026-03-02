@@ -96,3 +96,5 @@ postgres_data/
 *.onnx
 *.pt
 *.pth
+data/
+*.joblib
