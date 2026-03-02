@@ -1,0 +1,99 @@
+services:
+  # The Event Bus (In-memory queue)
+  redis:
+    image: redis:7-alpine
+    container_name: fraud_redis
+    expose:
+      - "6379"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # The Primary Database (Persistent storage)
+  db:
+    image: postgres:15-alpine
+    container_name: fraud_db
+    environment:
+      POSTGRES_USER: scholar
+      POSTGRES_PASSWORD: fraud_password
+      POSTGRES_DB: claims_db
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U scholar -d claims_db" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Ingestion API
+  ingestion_api:
+    build:
+      context: ./ingestion_api
+      dockerfile: Dockerfile
+    container_name: fraud_ingestion_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./shared:/app/shared
+    restart: always
+
+  # Analysis Worker
+  analysis_worker:
+    build:
+      context: ./analysis_worker
+      dockerfile: Dockerfile
+    container_name: fraud_analysis_worker
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_USER=scholar
+      - POSTGRES_PASSWORD=fraud_password
+      - POSTGRES_DB=claims_db
+      - MODELS_DIR=/app/models
+    volumes:
+      - ./analysis_worker/models:/app/models:ro
+      - ./shared:/app/shared
+    restart: always
+
+  # Dashboard
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: fraud_dashboard
+    ports:
+      - "8501:8501"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_USER=scholar
+      - POSTGRES_PASSWORD=fraud_password
+      - POSTGRES_DB=claims_db
+      - INGESTION_API_URL=http://ingestion_api:8080/ingest
+    volumes:
+      - ./shared:/app/shared
+    restart: always
+
+volumes:
+  postgres_data:
