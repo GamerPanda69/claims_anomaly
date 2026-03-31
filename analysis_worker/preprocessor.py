@@ -220,7 +220,7 @@ class ClaimPreprocessor:
         """Count non-empty codes"""
         return sum(
             1 for f in field_names
-            if claim_data.get(f) and str(claim_data[f]).strip().upper() != 'NAN'
+            if claim_data.get(f) and str(claim_data[f]).strip() and str(claim_data[f]).strip().upper() != 'NAN'
         )
 
 

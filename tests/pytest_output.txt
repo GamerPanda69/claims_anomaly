@@ -1,0 +1,192 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /home/gamerpanda/Desktop/claims_anomaly/.test_venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/gamerpanda/Desktop/claims_anomaly
+plugins: anyio-4.13.0
+collecting ... collected 74 items
+
+tests/test_worker.py::TestToFloat::test_float_value PASSED               [  1%]
+tests/test_worker.py::TestToFloat::test_int_value PASSED                 [  2%]
+tests/test_worker.py::TestToFloat::test_string_number PASSED             [  4%]
+tests/test_worker.py::TestToFloat::test_none_returns_default PASSED      [  5%]
+tests/test_worker.py::TestToFloat::test_invalid_string_returns_default PASSED [  6%]
+tests/test_worker.py::TestToFloat::test_zero_is_valid PASSED             [  8%]
+tests/test_worker.py::TestToInt::test_integer_value PASSED               [  9%]
+tests/test_worker.py::TestToInt::test_float_truncated PASSED             [ 10%]
+tests/test_worker.py::TestToInt::test_string_number PASSED               [ 12%]
+tests/test_worker.py::TestToInt::test_none_returns_default PASSED        [ 13%]
+tests/test_worker.py::TestToInt::test_invalid_string_returns_default PASSED [ 14%]
+tests/test_worker.py::TestToInt::test_negative_value PASSED              [ 16%]
+tests/test_worker.py::TestClaimPreprocessorInit::test_feature_names_count FAILED [ 17%]
+tests/test_worker.py::TestClaimPreprocessorInit::test_known_feature_names_present PASSED [ 18%]
+tests/test_worker.py::TestClaimPreprocessorInit::test_scaler_features_detected PASSED [ 20%]
+tests/test_worker.py::TestClaimPreprocessorInit::test_scaler_without_n_features_in_attr PASSED [ 21%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_output_is_2d_numpy_array PASSED [ 22%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_output_shape_matches_feature_count FAILED [ 24%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_claim_amount_in_features FAILED [ 25%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_age_maps_correctly FAILED [ 27%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_missing_optional_fields_use_defaults FAILED [ 28%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_gender_defaults_to_zero_when_missing PASSED [ 29%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_coverage_defaults_to_12_months FAILED [ 31%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_chronic_conditions_encoded_as_binary PASSED [ 32%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_total_chronic_conditions_count FAILED [ 33%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_renal_disease_indicator_y_maps_to_1 PASSED [ 35%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_renal_disease_indicator_default_maps_to_0 PASSED [ 36%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_num_diagnosis_codes_counts_non_empty FAILED [ 37%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_num_procedure_codes_counts_non_empty FAILED [ 39%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_has_multiple_physicians_flag PASSED [ 40%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_scaler_called_when_dimensions_match FAILED [ 41%]
+tests/test_worker.py::TestClaimPreprocessorPreprocess::test_manual_normalize_used_when_scaler_mismatch PASSED [ 43%]
+tests/test_worker.py::TestCalculateDuration::test_valid_iso_dates PASSED [ 44%]
+tests/test_worker.py::TestCalculateDuration::test_slash_date_format PASSED [ 45%]
+tests/test_worker.py::TestCalculateDuration::test_compact_date_format PASSED [ 47%]
+tests/test_worker.py::TestCalculateDuration::test_same_day_returns_1 PASSED [ 48%]
+tests/test_worker.py::TestCalculateDuration::test_missing_start_date_returns_1 PASSED [ 50%]
+tests/test_worker.py::TestCalculateDuration::test_missing_end_date_returns_1 PASSED [ 51%]
+tests/test_worker.py::TestCalculateDuration::test_invalid_format_returns_1 PASSED [ 52%]
+tests/test_worker.py::TestCalculateDuration::test_inverted_dates_return_1 PASSED [ 54%]
+tests/test_worker.py::TestCountCodes::test_counts_non_empty_codes PASSED [ 55%]
+tests/test_worker.py::TestCountCodes::test_ignores_nan_string PASSED     [ 56%]
+tests/test_worker.py::TestCountCodes::test_empty_string_not_counted FAILED [ 58%]
+tests/test_worker.py::TestCountCodes::test_all_missing_returns_zero PASSED [ 59%]
+tests/test_worker.py::TestManualNormalize::test_output_in_0_1_range PASSED [ 60%]
+tests/test_worker.py::TestManualNormalize::test_zero_vector_outputs_zeros PASSED [ 62%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_below_medium_is_low PASSED [ 63%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_at_medium_threshold PASSED [ 64%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_at_high_threshold PASSED [ 66%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_at_critical_threshold PASSED [ 67%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_1_is_critical PASSED [ 68%]
+tests/test_worker.py::TestFraudDetectorClassifyRisk::test_score_0_is_low PASSED [ 70%]
+tests/test_worker.py::TestFraudDetectorSlice::test_no_slice_when_sizes_match PASSED [ 71%]
+tests/test_worker.py::TestFraudDetectorSlice::test_slices_to_smaller_size PASSED [ 72%]
+tests/test_worker.py::TestFraudDetectorSlice::test_pads_to_larger_size PASSED [ 74%]
+tests/test_worker.py::TestFraudDetectorSlice::test_returns_as_is_when_expected_n_is_none PASSED [ 75%]
+tests/test_worker.py::TestFraudDetectorDetect::test_returns_required_keys PASSED [ 77%]
+tests/test_worker.py::TestFraudDetectorDetect::test_claim_id_propagated PASSED [ 78%]
+tests/test_worker.py::TestFraudDetectorDetect::test_low_score_not_anomaly FAILED [ 79%]
+tests/test_worker.py::TestFraudDetectorDetect::test_high_score_is_anomaly FAILED [ 81%]
+tests/test_worker.py::TestFraudDetectorDetect::test_combined_score_weighted PASSED [ 82%]
+tests/test_worker.py::TestFraudDetectorDetect::test_anomaly_score_is_float PASSED [ 83%]
+tests/test_worker.py::TestFraudDetectorDetect::test_is_anomaly_is_bool PASSED [ 85%]
+tests/test_worker.py::TestFraudDetectorDetect::test_analyzed_at_is_datetime PASSED [ 86%]
+tests/test_worker.py::TestFraudDetectorDetect::test_details_contain_essential_fields PASSED [ 87%]
+tests/test_worker.py::TestFraudDetectorDetect::test_preprocessor_called_with_claim_data PASSED [ 89%]
+tests/test_worker.py::TestFraudDetectorDetect::test_iforest_decision_function_called PASSED [ 90%]
+tests/test_worker.py::TestFraudDetectorDetect::test_iforest_fallback_score_on_error PASSED [ 91%]
+tests/test_worker.py::TestFraudDetectorDetect::test_autoencoder_fallback_to_decision_function PASSED [ 93%]
+tests/test_worker.py::TestFraudDetectorDetect::test_autoencoder_fallback_score_on_total_failure PASSED [ 94%]
+tests/test_worker.py::TestFraudDetectorIForestScore::test_very_negative_score_near_1 PASSED [ 95%]
+tests/test_worker.py::TestFraudDetectorIForestScore::test_zero_score_is_half PASSED [ 97%]
+tests/test_worker.py::TestFraudDetectorIForestScore::test_very_positive_score_near_0 PASSED [ 98%]
+tests/test_worker.py::TestFraudDetectorIForestScore::test_output_in_0_1 PASSED [100%]
+
+=================================== FAILURES ===================================
+______________ TestClaimPreprocessorInit.test_feature_names_count ______________
+tests/test_worker.py:119: in test_feature_names_count
+    assert len(pp.feature_names) == N_FEATURES
+E   AssertionError: assert 25 == 27
+E    +  where 25 = len(['claim_amount', 'deductible_amt_paid', 'amount_per_day', 'age', 'gender', 'race', ...])
+E    +    where ['claim_amount', 'deductible_amt_paid', 'amount_per_day', 'age', 'gender', 'race', ...] = <analysis_worker.preprocessor.ClaimPreprocessor object at 0x748a4a70fda0>.feature_names
+___ TestClaimPreprocessorPreprocess.test_output_shape_matches_feature_count ____
+tests/test_worker.py:151: in test_output_shape_matches_feature_count
+    assert result.shape == (1, N_FEATURES)
+E   AssertionError: assert (1, 25) == (1, 27)
+E     
+E     At index 1 diff: 25 != 27
+E     
+E     Full diff:
+E       (
+E           1,
+E     -     27,...
+E     
+E     ...Full output truncated (4 lines hidden), use '-vv' to show
+________ TestClaimPreprocessorPreprocess.test_claim_amount_in_features _________
+tests/test_worker.py:160: in test_claim_amount_in_features
+    assert result[0, 0] == pytest.approx(1234.0)
+E   assert np.float64(0.01234) == 1234.0 ± 0.001234
+E     
+E     comparison failed
+E     Obtained: 0.01234
+E     Expected: 1234.0 ± 0.001234
+___________ TestClaimPreprocessorPreprocess.test_age_maps_correctly ____________
+tests/test_worker.py:167: in test_age_maps_correctly
+    assert result[0, age_idx] == pytest.approx(55.0)
+E   assert np.float64(0.4583333333333333) == 55.0 ± 5.5e-05
+E     
+E     comparison failed
+E     Obtained: 0.4583333333333333
+E     Expected: 55.0 ± 5.5e-05
+__ TestClaimPreprocessorPreprocess.test_missing_optional_fields_use_defaults ___
+tests/test_worker.py:180: in test_missing_optional_fields_use_defaults
+    assert result.shape == (1, N_FEATURES)
+E   AssertionError: assert (1, 25) == (1, 27)
+E     
+E     At index 1 diff: 25 != 27
+E     
+E     Full diff:
+E       (
+E           1,
+E     -     27,...
+E     
+E     ...Full output truncated (4 lines hidden), use '-vv' to show
+_____ TestClaimPreprocessorPreprocess.test_coverage_defaults_to_12_months ______
+tests/test_worker.py:195: in test_coverage_defaults_to_12_months
+    assert result[0, idx_a] == pytest.approx(12.0)
+E   assert np.float64(1.0) == 12.0 ± 1.2e-05
+E     
+E     comparison failed
+E     Obtained: 1.0
+E     Expected: 12.0 ± 1.2e-05
+_____ TestClaimPreprocessorPreprocess.test_total_chronic_conditions_count ______
+tests/test_worker.py:220: in test_total_chronic_conditions_count
+    assert result[0, idx] == 3.0
+E   assert np.float64(0.2727272727272727) == 3.0
+__ TestClaimPreprocessorPreprocess.test_num_diagnosis_codes_counts_non_empty ___
+tests/test_worker.py:246: in test_num_diagnosis_codes_counts_non_empty
+    assert result[0, idx] == 3.0
+E   assert np.float64(0.3) == 3.0
+__ TestClaimPreprocessorPreprocess.test_num_procedure_codes_counts_non_empty ___
+tests/test_worker.py:254: in test_num_procedure_codes_counts_non_empty
+    assert result[0, idx] == 2.0
+E   assert np.float64(0.3333333333333333) == 2.0
+___ TestClaimPreprocessorPreprocess.test_scaler_called_when_dimensions_match ___
+tests/test_worker.py:271: in test_scaler_called_when_dimensions_match
+    scaler.transform.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'transform' to have been called once. Called 0 times.
+_________________ TestCountCodes.test_empty_string_not_counted _________________
+tests/test_worker.py:336: in test_empty_string_not_counted
+    assert pp._count_codes(claim, ["code_1", "code_2"]) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = _count_codes({'code_1': '   ', 'code_2': 'Z00'}, ['code_1', 'code_2'])
+E    +    where _count_codes = <analysis_worker.preprocessor.ClaimPreprocessor object at 0x748a4a770230>._count_codes
+______________ TestFraudDetectorDetect.test_low_score_not_anomaly ______________
+tests/test_worker.py:470: in test_low_score_not_anomaly
+    assert result['is_anomaly'] is False
+E   assert True is False
+______________ TestFraudDetectorDetect.test_high_score_is_anomaly ______________
+tests/test_worker.py:479: in test_high_score_is_anomaly
+    assert result['is_anomaly'] is True
+E   assert False is True
+=============================== warnings summary ===============================
+tests/test_worker.py::TestFraudDetectorDetect::test_high_score_is_anomaly
+  /home/gamerpanda/Desktop/claims_anomaly/tests/../analysis_worker/fraud_detector.py:142: RuntimeWarning: overflow encountered in exp
+    normalized     = 1.0 - 1.0 / (1.0 + np.exp(mse - 0.5))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_worker.py::TestClaimPreprocessorInit::test_feature_names_count
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_output_shape_matches_feature_count
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_claim_amount_in_features
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_age_maps_correctly
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_missing_optional_fields_use_defaults
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_coverage_defaults_to_12_months
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_total_chronic_conditions_count
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_num_diagnosis_codes_counts_non_empty
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_num_procedure_codes_counts_non_empty
+FAILED tests/test_worker.py::TestClaimPreprocessorPreprocess::test_scaler_called_when_dimensions_match
+FAILED tests/test_worker.py::TestCountCodes::test_empty_string_not_counted - ...
+FAILED tests/test_worker.py::TestFraudDetectorDetect::test_low_score_not_anomaly
+FAILED tests/test_worker.py::TestFraudDetectorDetect::test_high_score_is_anomaly
+=================== 13 failed, 61 passed, 1 warning in 0.32s ===================
